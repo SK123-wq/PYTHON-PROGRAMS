@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk,messagebox
+from PIL import Image,ImageTk
 class reastaurantordermanagement:
     def __init__(self, root):
         self.root = root
@@ -35,10 +36,11 @@ class reastaurantordermanagement:
         bgwidht,bgheight=800,600
         canvas=tk.Canvas(root,width=bgwidht,height=bgheight)
         canvas.pack()
-        originalimage=tk.PhotoImage(file=f"D:/ACER/Desktop/PYTHON PROGRAMS/images.jpeg")
-        backgroundimage=originalimage.subsample(originalimage.width(),originalimage.height())
-        canvas.create_image(0,0,anchor=tk.NW,image=backgroundimage)
-        canvas.image=backgroundimage
+        img=Image.open("D:/ACER/Desktop/PYTHON PROGRAMS/images.jpeg")
+        img=img.resize((bgwidht,bgheight))
+        originalimage=ImageTk.PhotoImage(img)
+        canvas.create_image(40,30,anchor=tk.NW,image=originalimage)
+        canvas.image=originalimage
     def updatemenuprices(self,*args):
         currency=self.currencyvar.get()
         symbol="₹" if currency=="NEPALI RS" else "$"
